@@ -1,5 +1,6 @@
 import {Input} from "./Input.tsx";
 import {type ChangeEvent, type Dispatch, type SetStateAction} from "react";
+import {Button} from "./Button.tsx";
 
 type SettingsScreenProps = {
 
@@ -11,7 +12,6 @@ type SettingsScreenProps = {
     setMinValue: Dispatch<SetStateAction<number>>,
     setMax: Dispatch<SetStateAction<number>>,
     setError: Dispatch<SetStateAction<string>>,
-
 }
 
 
@@ -24,7 +24,7 @@ export const SettingsScreen = ({min, setMinValue, setValue, max, setMax, setErro
         if (newValue >= 0 && newValue < max) {
 
             setMinValue(newValue)
-            setValue(newValue)
+            // setValue(newValue)
             localStorage.setItem('min', newValue.toString())
         }
 
@@ -54,6 +54,16 @@ export const SettingsScreen = ({min, setMinValue, setValue, max, setMax, setErro
 
     }
 
+    function onClickHandlerValues(min:number) {
+        setError('')
+
+        const newValue = min
+        console.log(newValue)
+        setValue(newValue)
+
+
+    }
+
 
     return (
         <div className={"settings-screen"}>
@@ -77,7 +87,9 @@ export const SettingsScreen = ({min, setMinValue, setValue, max, setMax, setErro
                 />
             </label>
 
-            {/*<Button title={"Set"} classes={"button"}/>*/}
+
+
+            <Button title={"Set"} classes={"button"} onClick={()=>onClickHandlerValues(min)}/>
         </div>
     );
 };

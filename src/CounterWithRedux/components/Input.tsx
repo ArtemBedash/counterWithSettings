@@ -9,9 +9,12 @@ type InputProps = {
 
 export const Input = (props: InputProps) => {
 
+
+
+
     return (
 
-        <input value={props.value} type={"number"} onChange={props.onChange} />
+        <input  value={props.value} type={"number"} onChange={props.onChange} />
     );
 };
 
