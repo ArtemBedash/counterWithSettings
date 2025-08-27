@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {MainScreen} from "./MainScreen.tsx";
-import {SettingsScreen} from "./SettingsScreen.tsx";
-import {useAppSelector} from "../hooks/useAppSelector.ts";
-import {storage} from "../helper/storage.ts";
+import {MainScreen} from "./MainScreen/MainScreen.tsx";
+import {SettingsScreen} from "./SettingsScreen/SettingsScreen.tsx";
+import {useAppSelector} from "../../../../common/hooks/useAppSelector.ts";
+import {storage} from "../../../../common/helper/storage.ts";
 
 
 export const Display = () => {

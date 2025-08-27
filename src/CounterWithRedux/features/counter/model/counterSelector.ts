@@ -1,4 +1,4 @@
-import type {RootState} from "./store.ts";
+import type {RootState} from "../../../app/store.ts";
 import type {InitialStateType} from "./counterReducer.ts";
 
 

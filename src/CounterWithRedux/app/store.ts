@@ -1,5 +1,5 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {countReducer} from "./counterReducer.ts";
+import {countReducer} from "../features/counter/model/counterReducer.ts";
 
 
 const rootReducer = combineReducers({

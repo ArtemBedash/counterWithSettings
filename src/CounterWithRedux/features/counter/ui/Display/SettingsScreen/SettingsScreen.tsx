@@ -1,10 +1,16 @@
-import {Input} from "./Input.tsx";
+import {Input} from "../../../../../common/components/Input/Input.tsx";
 import {type ChangeEvent, type Dispatch, type SetStateAction} from "react";
-import {Button} from "./Button.tsx";
-import {useAppSelector} from "../hooks/useAppSelector.ts";
-import {useAppDispatch} from "../hooks/useAppDispatch.ts";
-import {changeCountAC, changeMaxAC, changeMinAC, changeValueMaxScreen} from "../app/counterReducer.ts";
-import {selectValue} from "../app/counterSelector.ts";
+import {Button} from "../../../../../common/components/Button/Button.tsx";
+import {useAppSelector} from "../../../../../common/hooks/useAppSelector.ts";
+import {useAppDispatch} from "../../../../../common/hooks/useAppDispatch.ts";
+import {
+    changeCountAC,
+    changeCountMinAC,
+    changeMaxAC,
+    changeMinAC,
+    changeValueMaxScreenAC
+} from "../../../model/counterReducer.ts";
+import {selectValue} from "../../../model/counterSelector.ts";
 
 type SettingsScreenProps = {
 
@@ -14,19 +20,19 @@ type SettingsScreenProps = {
 
 export const SettingsScreen = ({setError}: SettingsScreenProps) => {
 
-    const values = useAppSelector(selectValue)
+    const {max, min} = useAppSelector(selectValue)
     const dispatch = useAppDispatch()
 
     function onChangeHandlerMin(e: ChangeEvent<HTMLInputElement>) {
         const newValue = Number((e.target.value));
         setError('')
-        if (newValue >= 0 && newValue < values.max) {
+        if (newValue >= 0 && newValue < max) {
 
-            dispatch(changeMinAC({minValue: newValue}))
+            dispatch(changeMinAC({min: newValue}))
 
         }
 
-        if (newValue >= values.max) {
+        if (newValue >= max) {
 
             setError("Min value must be lower than Max Value")
 
@@ -38,13 +44,12 @@ export const SettingsScreen = ({setError}: SettingsScreenProps) => {
 
         const newValue = Number((e.target.value))
         setError('')
-        if (newValue > values.min) {
+        if (newValue > min) {
 
-            dispatch(changeMaxAC({maxValue: newValue}))
-            localStorage.setItem('max', newValue.toString())
+            dispatch(changeMaxAC({max: newValue}))
         }
 
-        if (newValue <= values.min) {
+        if (newValue <= min) {
 
             setError("Max value must be higher than Min value")
 
@@ -56,9 +61,9 @@ export const SettingsScreen = ({setError}: SettingsScreenProps) => {
         setError('')
         const newValueMin = min
         const newValueMax = max
-        console.log(newValueMin)
-        dispatch(changeCountAC({value: newValueMin}))
-        dispatch(changeValueMaxScreen({valueMax: newValueMax}))
+        dispatch(changeCountAC({count: newValueMin}))
+        dispatch(changeValueMaxScreenAC({max: newValueMax}))
+        dispatch(changeCountMinAC({min: newValueMin}))
 
 
     }
@@ -70,7 +75,7 @@ export const SettingsScreen = ({setError}: SettingsScreenProps) => {
 
             <label className={"label"}>Set min value: {" "}
                 <Input
-                    value={values.min}
+                    value={min}
                     onChange={onChangeHandlerMin}
 
                 />
@@ -79,7 +84,7 @@ export const SettingsScreen = ({setError}: SettingsScreenProps) => {
 
                 <Input
 
-                    value={values.max}
+                    value={max}
                     onChange={onChangeHandlerMax}
 
 
@@ -87,7 +92,7 @@ export const SettingsScreen = ({setError}: SettingsScreenProps) => {
             </label>
 
 
-            <Button title={"Set"} classes={"button"} onClick={() => onClickHandlerValues(values.min, values.max)}/>
+            <Button title={"Set"} classes={"button"} onClick={() => onClickHandlerValues(min, max)}/>
         </div>
     );
 };
