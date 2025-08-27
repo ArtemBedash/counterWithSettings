@@ -6,7 +6,7 @@ type ProgressBarProps = {
 }
 
 
-export const ProgressBar = ({count,max,min}:ProgressBarProps) => {
+export const ProgressBar = ({count,max}:ProgressBarProps) => {
     return (
         <div style={{ width: `100%` }}>
             {/*<div style={{backgroundColor: `blueviolet`,width:`${(count - min) / (max - min)*100}%`,height:`10px`}} ></div>*/}
