@@ -16,7 +16,7 @@ const initialState: InitialStateType =
     storage.get<InitialStateType>('data', {
         count: 0,
         countMin: 0,
-        countMax: 0,
+        countMax: 10,
         min: 0,
         max: 10,
 
